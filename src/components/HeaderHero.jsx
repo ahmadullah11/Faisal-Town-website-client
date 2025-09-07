@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Building, Users, Award, MapPin } from "lucide-react";
+import { motion } from "framer-motion"; // 👈 Still using Framer Motion for hero, buttons, etc.
 
 const HeaderHero = () => {
   const [activeBtn, setActiveBtn] = useState(null);
@@ -52,64 +53,93 @@ const HeaderHero = () => {
       </div>
 
       {/* Hero Content */}
-      {/* 👇 added pt-24 to push hero below fixed header */}
       <main className="relative z-10 flex items-center justify-center min-h-screen text-center px-4 sm:px-6 pt-24">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center px-3 py-1 bg-amber-100 rounded-full text-amber-700 text-xs font-medium mb-4 tracking-wide">
+        <motion.div 
+          className="max-w-4xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className="inline-flex items-center px-3 py-1 bg-amber-100 rounded-full text-amber-700 text-xs font-medium mb-4 tracking-wide"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Pakistan's Leading Real Estate Developer
-          </div>
+          </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          <motion.h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
             Faisal Town{" "}
             <span className="text-transparent bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text">
               Group
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed mb-8 max-w-3xl mx-auto">
+          <motion.p
+            className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed mb-8 max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
             Faisal Town stands as a beacon of innovation and excellence in
             Pakistan's real estate industry. Under the visionary leadership of
             Chaudhry Abdul Majeed, the company has emerged as one of the
             fastest-growing enterprises.
-          </p>
+          </motion.p>
 
-{/* Buttons */}
-<div className="flex justify-between sm:justify-center gap-4 mb-12 max-w-xs mx-auto w-full">
-  <button
-    onClick={() => setActiveBtn("learn")}
-    className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 text-sm sm:text-base ${
-      activeBtn === "learn"
-        ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
-        : "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:shadow-lg hover:scale-105"
-    }`}
-  >
-    Learn More
-  </button>
+          {/* Buttons */}
+          <motion.div
+            className="flex flex-col sm:flex-row justify-center gap-4 mb-12 max-w-xs mx-auto w-full"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveBtn("learn")}
+              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 text-sm sm:text-base ${
+                activeBtn === "learn"
+                  ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
+                  : "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:shadow-lg hover:scale-105"
+              }`}
+            >
+              Learn More
+            </motion.button>
 
-  <button
-    onClick={() => setActiveBtn("portal")}
-    className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 text-sm sm:text-base ${
-      activeBtn === "portal"
-        ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
-        : "border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 backdrop-blur-sm"
-    }`}
-  >
-    Member Portal
-  </button>
-</div>
-
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveBtn("portal")}
+              className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 text-sm sm:text-base ${
+                activeBtn === "portal"
+                  ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
+                  : "border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 backdrop-blur-sm"
+              }`}
+            >
+              Member Portal
+            </motion.button>
+          </motion.div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8">
             {stats.map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <div key={i} className="group text-center">
+                <div
+                  key={i}
+                  className="group text-center transform transition-transform duration-300 hover:scale-105"
+                >
                   <div className="relative">
-                    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-105 transition-transform duration-300 shadow-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg transition-transform duration-300 group-hover:rotate-12">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
-                    <div className="absolute -inset-1 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </div>
                   <div className="text-xl lg:text-2xl font-bold text-white mb-1">
                     {stat.value}
@@ -117,12 +147,11 @@ const HeaderHero = () => {
                   <div className="text-sm text-gray-300 font-medium">
                     {stat.label}
                   </div>
-                  
                 </div>
               );
             })}
           </div>
-        </div>
+        </motion.div>
       </main>
     </div>
   );

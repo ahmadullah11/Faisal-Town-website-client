@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, MessageCircle, User, ArrowRight, Clock, Tag } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const OurRecentBlogs = () => {
   const blogs = [
@@ -38,8 +39,14 @@ const OurRecentBlogs = () => {
     }
   ];
 
-  const BlogCard = ({ blog }) => (
-    <article className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-500 overflow-hidden text-center">
+  const BlogCard = ({ blog, index }) => (
+    <motion.article
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+      viewport={{ once: true }}
+      className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-500 overflow-hidden text-center"
+    >
       {/* Blog Image */}
       <div className="relative overflow-hidden">
         <img
@@ -65,7 +72,7 @@ const OurRecentBlogs = () => {
         </div>
       </div>
 
-      {/* Blog Content */}
+      {/* Blog Content (no motion here, text stays static) */}
       <div className="p-4">
         {/* Meta */}
         <div className="flex justify-center flex-wrap gap-3 text-xs text-gray-500 mb-3">
@@ -99,7 +106,7 @@ const OurRecentBlogs = () => {
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
-    </article>
+    </motion.article>
   );
 
   return (
@@ -124,13 +131,19 @@ const OurRecentBlogs = () => {
 
         {/* Blogs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          {blogs.map((blog) => (
-            <BlogCard key={blog.id} blog={blog} />
+          {blogs.map((blog, index) => (
+            <BlogCard key={blog.id} blog={blog} index={index} />
           ))}
         </div>
 
         {/* Newsletter */}
-        <div className="bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl p-6 text-white max-w-2xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl p-6 text-white max-w-2xl mx-auto"
+        >
           <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
           <p className="text-xs mb-4">
             Subscribe to get the latest updates on real estate trends and investment tips.
@@ -146,21 +159,21 @@ const OurRecentBlogs = () => {
               Subscribe
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        {/* <div className="mt-8">
-          <button className="inline-flex items-center space-x-2 bg-gray-900 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-black transition-all">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="mt-8"
+        >
+          <button className="inline-flex items-center space-x-2 bg-amber-500 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-yellow-500 transition-all">
             <span>View All Blogs</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-        </div> */}
-        <div className="text-center mt-10">
-                  <button className="inline-flex items-center space-x-2 bg-amber-500 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-amber-600 transition">
-                    <span>View All Blogs</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
+        </motion.div>
       </div>
     </section>
   );

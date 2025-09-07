@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import OurProjects from './components/OurProjects'
 import WhyChoose from './components/WhyChoose'
 import Header from './components/Header'
+import Questions from './components/Questions'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <OurProjects />
       <OurClientReviews />
       <OurRecentBlogs />
+      <Questions />
       <ContactSection />
       <Footer />
     </div>

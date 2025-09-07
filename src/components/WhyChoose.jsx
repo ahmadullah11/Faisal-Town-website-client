@@ -1,5 +1,6 @@
 import React from "react";
 import { Home, Globe, Headphones, List } from "lucide-react"; // icons
+import { motion } from "framer-motion"; // 👈 Import Framer Motion
 
 const WhyChoose = () => {
   const features = [
@@ -33,7 +34,13 @@ const WhyChoose = () => {
     <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <div className="inline-flex items-center px-3 py-1 bg-amber-100 rounded-full text-amber-700 text-xs font-medium mb-4">
             🌟 Why Choose Us
           </div>
@@ -50,27 +57,46 @@ const WhyChoose = () => {
             complete lifestyle destination offering comfort, convenience, and
             investment opportunities.
           </p>
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          transition={{ staggerChildren: 0.2 }}
+          viewport={{ once: true }}
+        >
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
               className="text-center bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition"
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.7 }}
+              whileHover={{ scale: 1.05 }} // 👈 card scales
             >
-              <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              {/* Icon with rotation effect */}
+              <motion.div
+                className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4"
+                whileHover={{ rotate: 15 }} // 👈 rotate slightly
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 {feature.icon}
-              </div>
+              </motion.div>
+
+              {/* Static Text */}
               <h3 className="text-lg font-semibold text-gray-900">
                 {feature.title}
               </h3>
               <p className="mt-2 text-gray-600 text-sm">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
