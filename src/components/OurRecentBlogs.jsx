@@ -149,12 +149,18 @@ const OurRecentBlogs = () => {
         </div>
 
         {/* CTA */}
-        <div className="mt-8">
+        {/* <div className="mt-8">
           <button className="inline-flex items-center space-x-2 bg-gray-900 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-black transition-all">
             <span>View All Blogs</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-        </div>
+        </div> */}
+        <div className="text-center mt-10">
+                  <button className="inline-flex items-center space-x-2 bg-amber-500 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-amber-600 transition">
+                    <span>View All Blogs</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
       </div>
     </section>
   );
