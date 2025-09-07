@@ -15,23 +15,24 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // all items now redirect to "/"
   const navigation = [
     { name: "Home", href: "/", active: true },
-    { name: "About Us", href: "/about" },
+    { name: "About Us", href: "/" },
     {
       name: "Projects",
-      href: "/projects",
+      href: "/",
       dropdown: [
-        { name: "Faisal Town", href: "/projects/faisal-town" },
-        { name: "Faisal Hills", href: "/projects/faisal-hills" },
-        { name: "Faisal Margalla City", href: "/projects/faisal-margalla-city" },
-        { name: "All Projects", href: "/projects" },
+        { name: "Faisal Town", href: "/" },
+        { name: "Faisal Hills", href: "/" },
+        { name: "Faisal Margalla City", href: "/" },
+        { name: "All Projects", href: "/" },
       ],
     },
-    { name: "Downloads", href: "/downloads" },
-    { name: "Contact Us", href: "/contact" },
-    { name: "Blogs", href: "/blogs" },
-    { name: "Member Portal", href: "/portal" },
+    { name: "Downloads", href: "/" },
+    { name: "Contact Us", href: "/" },
+    { name: "Blogs", href: "/" },
+    { name: "Member Portal", href: "/" },
   ];
 
   return (
@@ -71,7 +72,7 @@ const Header = () => {
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <a
-                  href={item.href}
+                  href="/"
                   className={`flex items-center space-x-1 px-2 py-1 rounded-md text-sm transition-all duration-300 ${
                     item.active
                       ? "text-amber-400 bg-amber-400/10"
@@ -88,7 +89,7 @@ const Header = () => {
                     {item.dropdown.map((dropItem, dropIndex) => (
                       <a
                         key={dropIndex}
-                        href={dropItem.href}
+                        href="/"
                         className="block px-4 py-2 text-gray-300 hover:text-amber-400 hover:bg-slate-700/60 transition-all text-sm"
                       >
                         {dropItem.name}
@@ -123,12 +124,13 @@ const Header = () => {
               {navigation.map((item, index) => (
                 <a
                   key={index}
-                  href={item.href}
+                  href="/"
                   className={`block px-3 py-2 rounded-md text-sm transition-all ${
                     item.active
                       ? "text-blue-700 bg-blue-200"
                       : "text-gray-700 hover:text-blue-600 hover:bg-blue-200"
                   }`}
+                  onClick={() => setIsMenuOpen(false)} // close menu after click
                 >
                   {item.name}
                 </a>
