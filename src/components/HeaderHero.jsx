@@ -117,6 +117,7 @@ const HeaderHero = () => {
                   <div className="text-sm text-gray-300 font-medium">
                     {stat.label}
                   </div>
+                  
                 </div>
               );
             })}

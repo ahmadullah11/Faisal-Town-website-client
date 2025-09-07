@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React, { useState, useEffect } from "react";
 import { Search, Menu, X, ChevronDown, Building } from "lucide-react";
 
@@ -35,67 +36,60 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-xl backdrop-blur-md py-3"
-          : "bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 backdrop-blur-sm py-4"
+          ? "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-lg py-2"
+          : "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-3"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between">
-          
-          {/* Logo - Enhanced with consistent styling */}
-          <div className="flex items-center space-x-3 group cursor-pointer">
-            <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 group-hover:shadow-amber-500/25 transition-all duration-300">
-                <Building className="w-5 h-5 text-white" />
-              </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+          {/* Logo */}
+          <div className="flex items-center space-x-2 group cursor-pointer">
+            <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+              <Building className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white leading-tight tracking-wide">
-                FAISAL<span className="text-transparent bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text">TOWN</span>
+              <h1 className="text-lg font-bold text-white leading-tight">
+                FAISALTOWN
               </h1>
-              <p className="text-[10px] text-amber-400 font-medium tracking-wider">
+              <p className="text-[10px] text-amber-400 font-medium">
                 Building Better Futures
               </p>
             </div>
           </div>
 
-          {/* Desktop Navigation - Enhanced */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-5">
             {navigation.map((item, index) => (
               <div
                 key={index}
                 className="relative group"
-                onMouseEnter={() => setActiveDropdown(item.dropdown ? index : null)}
+                onMouseEnter={() =>
+                  setActiveDropdown(item.dropdown ? index : null)
+                }
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <a
                   href={item.href}
-                  className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  className={`flex items-center space-x-1 px-2 py-1 rounded-md text-sm transition-all duration-300 ${
                     item.active
-                      ? "text-amber-400 bg-amber-400/10 shadow-md"
-                      : "text-gray-300 hover:text-amber-400 hover:bg-slate-800/70 hover:shadow-md"
+                      ? "text-amber-400 bg-amber-400/10"
+                      : "text-gray-300 hover:text-amber-400 hover:bg-slate-800/70"
                   }`}
                 >
-                  <span>{item.name}</span>
-                  {item.dropdown && (
-                    <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${
-                      activeDropdown === index ? 'rotate-180' : ''
-                    }`} />
-                  )}
+                  <span className="font-medium">{item.name}</span>
+                  {item.dropdown && <ChevronDown className="w-3 h-3" />}
                 </a>
 
-                {/* Enhanced Dropdown */}
+                {/* Dropdown */}
                 {item.dropdown && activeDropdown === index && (
-                  <div className="absolute top-full left-0 mt-3 w-60 bg-slate-800/95 backdrop-blur-md rounded-xl shadow-2xl border border-slate-700/50 py-2 opacity-0 animate-fade-in">
-                    <div className="absolute -top-1 left-6 w-2 h-2 bg-slate-800 border-l border-t border-slate-700/50 rotate-45"></div>
+                  <div className="absolute top-full left-0 mt-2 w-52 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700 py-2">
                     {item.dropdown.map((dropItem, dropIndex) => (
                       <a
                         key={dropIndex}
                         href={dropItem.href}
-                        className="block px-4 py-3 text-sm text-gray-300 hover:text-amber-400 hover:bg-slate-700/60 transition-all duration-200 border-l-2 border-transparent hover:border-amber-400"
+                        className="block px-4 py-2 text-gray-300 hover:text-amber-400 hover:bg-slate-700/60 transition-all text-sm"
                       >
                         {dropItem.name}
                       </a>
@@ -106,86 +100,43 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Desktop Search - Enhanced */}
-          <div className="hidden lg:flex items-center space-x-3">
-            <div className="relative group">
-              <button className="p-3 text-gray-300 hover:text-amber-400 hover:bg-slate-800/70 rounded-lg transition-all duration-300 hover:shadow-lg">
-                <Search className="w-4 h-4" />
-              </button>
-              <div className="absolute -inset-1 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-            </div>
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center">
+            <button className="p-2 text-gray-300 hover:text-amber-400 hover:bg-slate-800/70 rounded-md transition-all">
+              <Search className="w-4 h-4" />
+            </button>
           </div>
 
-          {/* Mobile Menu Button - Enhanced */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden relative p-3 text-gray-300 hover:text-amber-400 hover:bg-slate-800/70 rounded-lg transition-all duration-300"
+            className="lg:hidden p-2 text-gray-300 hover:bg-slate-800/70 rounded-md transition-colors"
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
-        {/* Enhanced Mobile Menu */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-slate-900/98 backdrop-blur-md border border-slate-700/50 rounded-xl shadow-2xl overflow-hidden">
-            <div className="px-4 py-6 space-y-1">
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-blue-100 border-t border-blue-300 shadow-lg">
+            <div className="px-4 py-4 space-y-2">
               {navigation.map((item, index) => (
-                <div key={index}>
-                  <a
-                    href={item.href}
-                    className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      item.active
-                        ? "text-amber-400 bg-amber-400/10"
-                        : "text-gray-300 hover:text-amber-400 hover:bg-slate-800/70"
-                    }`}
-                  >
-                    <span>{item.name}</span>
-                    {item.dropdown && <ChevronDown className="w-4 h-4" />}
-                  </a>
-                  {/* Mobile Dropdown */}
-                  {item.dropdown && (
-                    <div className="ml-4 mt-2 space-y-1">
-                      {item.dropdown.map((dropItem, dropIndex) => (
-                        <a
-                          key={dropIndex}
-                          href={dropItem.href}
-                          className="block px-4 py-2 text-sm text-gray-400 hover:text-amber-400 rounded-lg transition-all duration-200"
-                        >
-                          {dropItem.name}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <a
+                  key={index}
+                  href={item.href}
+                  className={`block px-3 py-2 rounded-md text-sm transition-all ${
+                    item.active
+                      ? "text-blue-700 bg-blue-200"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-200"
+                  }`}
+                >
+                  {item.name}
+                </a>
               ))}
-              
-              {/* Mobile Search */}
-              <div className="pt-4 border-t border-slate-700/50">
-                <button className="flex items-center space-x-2 px-4 py-3 text-gray-300 hover:text-amber-400 rounded-lg transition-all duration-200 w-full">
-                  <Search className="w-4 h-4" />
-                  <span className="text-sm">Search</span>
-                </button>
-              </div>
             </div>
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out forwards;
-        }
-      `}</style>
     </header>
   );
 };
