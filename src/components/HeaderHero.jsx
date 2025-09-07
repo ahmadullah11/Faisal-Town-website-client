@@ -73,30 +73,31 @@ const HeaderHero = () => {
             fastest-growing enterprises.
           </p>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <button
-              onClick={() => setActiveBtn("learn")}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                activeBtn === "learn"
-                  ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
-                  : "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:shadow-lg hover:scale-105"
-              }`}
-            >
-              Learn More
-            </button>
+{/* Buttons */}
+<div className="flex justify-between sm:justify-center gap-4 mb-12 max-w-xs mx-auto w-full">
+  <button
+    onClick={() => setActiveBtn("learn")}
+    className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 text-sm sm:text-base ${
+      activeBtn === "learn"
+        ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
+        : "bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:shadow-lg hover:scale-105"
+    }`}
+  >
+    Learn More
+  </button>
 
-            <button
-              onClick={() => setActiveBtn("portal")}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                activeBtn === "portal"
-                  ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
-                  : "border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 backdrop-blur-sm"
-              }`}
-            >
-              Member Portal
-            </button>
-          </div>
+  <button
+    onClick={() => setActiveBtn("portal")}
+    className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 text-sm sm:text-base ${
+      activeBtn === "portal"
+        ? "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg scale-105"
+        : "border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 backdrop-blur-sm"
+    }`}
+  >
+    Member Portal
+  </button>
+</div>
+
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8">
