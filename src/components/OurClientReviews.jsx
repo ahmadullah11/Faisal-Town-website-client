@@ -1,241 +1,139 @@
-import React, { useState, useEffect } from "react";
-import {
-  Star,
-  Quote,
-  ChevronLeft,
-  ChevronRight,
-  MapPin,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { ArrowRight, Star, Quote } from "lucide-react";
+import { motion } from "framer-motion";
 
-const OurClientReviews = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  const reviews = [
+const Testimonials = () => {
+  const testimonials = [
     {
       id: 1,
-      name: "Sonia Khan",
-      designation: "Resident",
-      location: "Faisal Town Phase 1",
-      rating: 5,
-      review:
-        "The community is strong here. Last month, the park held a family event, and it was heartwarming to see everyone come together.",
-      image:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
-      joinedYear: "2022",
+      quote: "Found my dream home through Faisal Town. The process was seamless and their team was incredibly helpful throughout the entire journey.",
+      name: "Yasin",
+      location: "Batkhila",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      rating: 5
     },
     {
       id: 2,
-      name: "Bilal Qureshi",
-      designation: "Resident",
-      location: "Faisal Hills",
-      rating: 5,
-      review:
-        "It's not just about security guards at the gates; Faisal Town has CCTV everywhere. That kind of investment in safety is rare.",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      joinedYear: "2023",
+      quote: "Exceptional service! Their attention to detail and understanding of our needs made house hunting a breeze. They found us the perfect property in a competitive market.",
+      name: "Suliman",
+      location: "Temargara",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      rating: 5
     },
+    {
+      id: 3,
+      quote: "Professional team that goes above and beyond. They helped us find the perfect property within our budget and negotiated a better price than we expected.",
+      name: "Aamir",
+      location: "Swat",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+      rating: 5
+    },
+    {
+      id: 4,
+      quote: "Faisal Town property recommendations were spot-on! I found exactly what I was looking for in half the time I expected. Their technology is truly impressive.",
+      name: "David",
+      location: "Swat, Pary",
+      avatar: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=100&h=100&fit=crop&crop=face",
+      rating: 5
+    },
+    {
+      id: 5,
+      quote: "The virtual tours saved me so much time. I was relocating from another state, and Faisal Town made the entire process stress-free with their detailed property insights.",
+      name: "Angela",
+      location: "Swat, Bankot",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+      rating: 5
+    },
+    {
+      id: 6,
+      quote: "What impressed me most was how transparent they were about every property. No surprises at all, and their support team was always available to answer my questions.",
+      name: "Abbas",
+      location: "Islamabad, G12",
+      avatar: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=100&h=100&fit=crop&crop=face",
+      rating: 5
+    }
   ];
 
-  // Auto-play
-  useEffect(() => {
-    if (isAutoPlaying) {
-      const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % reviews.length);
-      }, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [isAutoPlaying, reviews.length]);
+  const TestimonialCard = ({ testimonial }) => (
+    <motion.div 
+      className="group bg-white rounded-xl p-4 lg:p-5 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-amber-200 relative overflow-hidden text-center"
+      whileHover={{ scale: 1.03 }}
+    >
+      {/* Quote Icon */}
+      <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-3">
+        <Quote className="w-5 h-5 text-white" />
+      </div>
 
-  const nextSlide = () =>
-    setCurrentSlide((prev) => (prev + 1) % reviews.length);
-  const prevSlide = () =>
-    setCurrentSlide((prev) => (prev - 1 + reviews.length) % reviews.length);
-  const goToSlide = (i) => setCurrentSlide(i);
+      {/* Rating Stars */}
+      <div className="flex justify-center space-x-1 mb-3">
+        {[...Array(testimonial.rating)].map((_, i) => (
+          <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+        ))}
+      </div>
 
-  const StarRating = ({ rating }) => (
-    <div className="flex justify-center space-x-1 mb-2">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          className={`w-4 h-4 ${
-            i < rating ? "text-amber-400 fill-amber-400" : "text-gray-300"
-          }`}
-        />
-      ))}
-    </div>
+      {/* Quote */}
+      <blockquote className="text-gray-700 leading-snug mb-4 text-sm lg:text-sm">
+        "{testimonial.quote}"
+      </blockquote>
+
+      {/* User Info */}
+      <div className="flex flex-col items-center space-y-1">
+        <div className="relative">
+          <img
+            src={testimonial.avatar}
+            alt={testimonial.name}
+            className="w-14 h-14 rounded-full object-cover ring-2 ring-amber-100"
+          />
+          <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full flex items-center justify-center">
+            <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
+          </div>
+        </div>
+        
+        <div>
+          <h4 className="font-semibold text-gray-900 text-base">{testimonial.name}</h4>
+          <p className="text-gray-600 text-xs">{testimonial.location}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 
   return (
-    <section className="py-12 bg-gradient-to-br from-slate-50 via-white to-amber-50">
-      <div className="max-w-5xl mx-auto px-4">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="inline-flex items-center px-3 py-1 bg-amber-100 rounded-full text-amber-700 text-xs font-medium mb-3">
-            ⭐ OUR TESTIMONIAL
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center px-3 py-1 bg-amber-100 rounded-full text-amber-700 text-xs font-medium mb-4">
+            TESTIMONIALS
           </div>
-
+          
           <h2 className="text-3xl font-bold text-gray-900 mb-3">
-            Our Client{" "}
-            <span className="text-transparent bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text">
-              Reviews
-            </span>
+            What Our <span className="text-transparent bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text">Clients Say</span>
           </h2>
-
+          
+          <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto mb-6 rounded-full"></div>
+          
           <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            Client Reviews at Faisal Town highlight satisfaction with
-            high-quality housing, modern amenities, and exceptional customer
-            service.
+            Discover why homeowners trust Faisal Town to find their perfect property
           </p>
-        </motion.div>
-
-        {/* Carousel */}
-        <div className="relative">
-          <div
-            className="overflow-hidden rounded-2xl"
-            onMouseEnter={() => setIsAutoPlaying(false)}
-            onMouseLeave={() => setIsAutoPlaying(true)}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={reviews[currentSlide].id}
-                className="w-full flex-shrink-0 px-2"
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="bg-white rounded-xl p-6 shadow-md mx-auto max-w-xl text-center">
-                  {/* Quote */}
-                  <div className="flex justify-center mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center">
-                      <Quote className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Review */}
-                  <StarRating rating={reviews[currentSlide].rating} />
-                  <blockquote className="text-base md:text-lg text-gray-700 italic mb-4">
-                    "{reviews[currentSlide].review}"
-                  </blockquote>
-
-                  {/* Reviewer */}
-                  <div className="flex flex-col items-center space-y-2">
-                    <img
-                      src={reviews[currentSlide].image}
-                      alt={reviews[currentSlide].name}
-                      className="w-16 h-16 rounded-full object-cover border-2 border-amber-100"
-                    />
-                    <h4 className="text-base font-semibold text-gray-900">
-                      {reviews[currentSlide].name}
-                    </h4>
-                    <p className="text-xs text-gray-600">
-                      {reviews[currentSlide].designation} • Since{" "}
-                      {reviews[currentSlide].joinedYear}
-                    </p>
-                    <p className="text-xs text-amber-600 flex items-center gap-1">
-                      <MapPin className="w-3 h-3" />{" "}
-                      {reviews[currentSlide].location}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center text-gray-600 hover:text-amber-600"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center text-gray-600 hover:text-amber-600"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
         </div>
 
-        {/* Indicators */}
-        <div className="flex justify-center space-x-1 mt-4">
-          {reviews.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goToSlide(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === currentSlide ? "bg-amber-500 w-6" : "bg-gray-300 w-2"
-              }`}
-            />
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {testimonials.map((testimonial) => (
+            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
         </div>
 
-        {/* Stats */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { staggerChildren: 0.2 },
-            },
-          }}
-        >
-          {[
-            { value: "4.9/5", label: "Average Rating" },
-            { value: "50K+", label: "Happy Clients" },
-            { value: "100%", label: "Satisfaction" },
-            { value: "25+", label: "Years of Excellence" },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              className="text-center p-4 bg-white rounded-xl shadow"
-              variants={{
-                hidden: { opacity: 0, scale: 0.9 },
-                visible: { opacity: 1, scale: 1 },
-              }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="text-lg font-bold text-amber-500">
-                {stat.value}
-              </div>
-              <div className="text-xs text-gray-600">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          className="text-center mt-10"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl p-6 text-white">
-            <h3 className="text-xl font-bold mb-2">Join Our Happy Community</h3>
-            <p className="text-xs mb-4 max-w-md mx-auto">
-              Become part of Pakistan's most trusted real estate community.
-            </p>
-            <button className="bg-white text-amber-600 px-4 py-2 rounded-md text-sm font-medium">
-              Get Started Today
-            </button>
-          </div>
-        </motion.div>
+        {/* CTA Button */}
+        <div className="text-center">
+          <button className="group inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm">
+            <span>Share Your Experience</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+          </button>
+        </div>
       </div>
     </section>
   );
 };
 
-export default OurClientReviews;
+export default Testimonials;

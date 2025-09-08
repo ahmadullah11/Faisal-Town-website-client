@@ -142,6 +142,8 @@ const OurProjects = () => {
             </span>
           </h2>
 
+           <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto mb-6 rounded-full"></div>
+
           <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
             Faisal Town continues to grow with innovative developments,
             providing modern infrastructure and world-class amenities to

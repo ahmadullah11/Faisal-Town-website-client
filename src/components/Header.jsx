@@ -91,28 +91,30 @@ const Header = () => {
                   {item.dropdown && <ChevronDown className="w-3 h-3" />}
                 </motion.a>
 
-                {/* Dropdown */}
-                <AnimatePresence>
-                  {item.dropdown && activeDropdown === index && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute top-full left-0 mt-2 w-52 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700 py-2"
-                    >
-                      {item.dropdown.map((dropItem, dropIndex) => (
-                        <a
-                          key={dropIndex}
-                          href="/"
-                          className="block px-4 py-2 text-gray-300 hover:text-amber-400 hover:bg-slate-700/60 transition-all text-sm"
-                        >
-                          {dropItem.name}
-                        </a>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+               {/* Dropdown */}
+<AnimatePresence>
+  {item.dropdown && activeDropdown === index && (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3 }}
+      className="absolute top-full left-0 mt-2 min-w-[150px] bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700 py-2"
+    >
+      {item.dropdown.map((dropItem, dropIndex) => (
+        <a
+          key={dropIndex}
+          href="/"
+          className="block px-4 py-2 text-gray-300 hover:text-amber-400 hover:bg-slate-700/60 transition-all text-sm whitespace-nowrap"
+        >
+          {dropItem.name}
+        </a>
+      ))}
+    </motion.div>
+  )}
+</AnimatePresence>
+
+                
               </div>
             ))}
           </nav>

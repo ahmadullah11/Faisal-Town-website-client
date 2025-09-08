@@ -52,6 +52,8 @@ const WhyChoose = () => {
             </span>
           </h2>
 
+           <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto mb-6 rounded-full"></div>
+
           <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
             Faisal Town Islamabad is more than just a housing society – it’s a
             complete lifestyle destination offering comfort, convenience, and

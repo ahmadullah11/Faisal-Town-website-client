@@ -122,6 +122,8 @@ const OurRecentBlogs = () => {
           <h2 className="text-2xl font-bold text-gray-900 mb-3">
             Our Recent <span className="text-transparent bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text">Blogs</span>
           </h2>
+
+           <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto mb-6 rounded-full"></div>
           
           <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
             Our Recent Blogs at Faisal Town cover the latest updates on real estate trends, 
